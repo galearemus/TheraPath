@@ -1,0 +1,84 @@
+{
+  "name": "thera-path-client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/thera-path-client/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/thera-path-client",
+        "index": "apps/thera-path-client/src/index.html",
+        "browser": "apps/thera-path-client/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/thera-path-client/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/thera-path-client/src/favicon.ico",
+          "apps/thera-path-client/src/assets"
+        ],
+        "styles": ["apps/thera-path-client/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/thera-path-client/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/thera-path-client/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "thera-path-client:build:production"
+        },
+        "development": {
+          "buildTarget": "thera-path-client:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "thera-path-client:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/thera-path-client/jest.config.ts"
+      }
+    }
+  }
+}

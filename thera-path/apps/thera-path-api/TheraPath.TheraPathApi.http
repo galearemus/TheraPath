@@ -1,0 +1,6 @@
+@TheraPath.TheraPathApi_HostAddress = http://localhost:5295
+
+GET {{TheraPath.TheraPathApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
